@@ -10,8 +10,9 @@ avec un **modèle Unraid** pour l'installer comme n'importe quelle application.
 
 ## Installation sur Unraid
 
-1. Onglet **Docker** → **Add Container** → dans **Template**, colle l'adresse :
-   `https://raw.githubusercontent.com/riourik/olala-server/main/unraid/olala-server.xml`
+1. Dans le terminal d'Unraid, installe le modèle :
+   `wget -O /boot/config/plugins/dockerMan/templates-user/my-olala-server.xml https://raw.githubusercontent.com/riourik/olala-server/main/unraid/olala-server.xml`
+   puis onglet **Docker** → **Add Container** → choisis **olala-server** dans **Template**.
 2. Vérifie les réglages, puis **Apply**.
 3. Le premier démarrage télécharge le modèle (environ 7 Go) : suis-le dans les **logs** du container.
 

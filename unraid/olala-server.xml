@@ -1,28 +1,28 @@
 <?xml version="1.0"?>
 <Container version="2">
-  <Name>Olala-Server</Name>
+  <Name>olala-server</Name>
   <Repository>bayota/olala-server:latest</Repository>
   <Registry>https://hub.docker.com/r/bayota/olala-server</Registry>
   <Network>bridge</Network>
   <Privileged>false</Privileged>
   <Support>https://github.com/riourik/olala-server</Support>
   <Project>https://huggingface.co/collections/OVHaiLLM/olala-v10-mini-7a1b</Project>
-  <Overview>Olala mini 7A1B (OVHcloud), servi sur le processeur par la version modifiée de llama.cpp d'OVHcloud. Adresse compatible OpenAI sur /v1 (pour Hermes, OpenWebUI…). Le modèle (environ 7 Go) est téléchargé automatiquement au premier démarrage dans le dossier Modèles.</Overview>
+  <Overview>Olala mini 7A1B (OVHcloud) served on the CPU by OVHcloud's modified llama.cpp. OpenAI-compatible API on /v1 (for Hermes, Open WebUI, etc.). The model (about 7 GB) is downloaded automatically into the models folder on first start.</Overview>
   <Category>AI: Tools:</Category>
   <WebUI/>
   <TemplateURL>https://raw.githubusercontent.com/riourik/olala-server/main/unraid/olala-server.xml</TemplateURL>
   <Icon>https://huggingface.co/OVHaiLLM/Olala-v1.0-mini-7A1B/resolve/main/assets/ovhai-llm-logo.svg</Icon>
   <ExtraParams>--cpus=5</ExtraParams>
   <PostArgs/>
-  <Config Name="Port de l'API" Target="8080" Default="8090" Mode="tcp" Description="Adresse pour Hermes : http://IP-DE-TOWER:8090/v1" Type="Port" Display="always" Required="true" Mask="false">8090</Config>
-  <Config Name="Modèles" Target="/models" Default="/mnt/user/appdata/olala/models" Mode="rw" Description="Dossier où le modèle est téléchargé et conservé" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/olala/models</Config>
-  <Config Name="Fichier du modèle" Target="MODEL_FILE" Default="Olala-v1.0-mini-7A1B-q8_0-safe2.gguf" Mode="" Description="q8_0-safe2 (6,9 Go, recommandé sur processeur x86) ou q5_k_m (6,0 Go, plus léger)" Type="Variable" Display="always" Required="true" Mask="false">Olala-v1.0-mini-7A1B-q8_0-safe2.gguf</Config>
-  <Config Name="Cœurs utilisés" Target="THREADS" Default="5" Mode="" Description="Nombre de cœurs physiques (garde-en un pour le reste du serveur)" Type="Variable" Display="always" Required="true" Mask="false">5</Config>
-  <Config Name="Contexte" Target="CTX_SIZE" Default="32768" Mode="" Description="Taille du contexte en tokens (maximum 32768 pour ce modèle), partagée entre les conversations" Type="Variable" Display="always" Required="true" Mask="false">32768</Config>
-  <Config Name="Conversations simultanées" Target="PARALLEL" Default="2" Mode="" Description="Nombre de requêtes traitées en même temps" Type="Variable" Display="advanced" Required="true" Mask="false">2</Config>
-  <Config Name="Effort de réflexion" Target="REASONING_EFFORT" Default="low" Mode="" Description="Par défaut : disabled, low, medium ou high (plus haut = plus lent sur processeur)" Type="Variable" Display="always" Required="true" Mask="false">low</Config>
-  <Config Name="Nom du modèle (alias)" Target="MODEL_ALIAS" Default="olala-mini" Mode="" Description="Identifiant à utiliser dans Hermes (model.default)" Type="Variable" Display="advanced" Required="false" Mask="false">olala-mini</Config>
-  <Config Name="Clé API (optionnelle)" Target="API_KEY" Default="" Mode="" Description="Si remplie, les clients doivent envoyer cette clé" Type="Variable" Display="advanced" Required="false" Mask="true"/>
-  <Config Name="Options supplémentaires" Target="EXTRA_ARGS" Default="" Mode="" Description="Options llama-server en plus (avancé)" Type="Variable" Display="advanced" Required="false" Mask="false"/>
-  <Config Name="Dépôt Hugging Face" Target="MODEL_REPO" Default="OVHaiLLM/Olala-v1.0-mini-7A1B-GGUF" Mode="" Description="Source du téléchargement automatique" Type="Variable" Display="advanced" Required="false" Mask="false">OVHaiLLM/Olala-v1.0-mini-7A1B-GGUF</Config>
+  <Config Name="API Port" Target="8080" Default="8090" Mode="tcp" Description="OpenAI-compatible API. Address for clients: http://TOWER-IP:8090/v1" Type="Port" Display="always" Required="true" Mask="false">8090</Config>
+  <Config Name="Models" Target="/models" Default="/mnt/user/appdata/olala/models" Mode="rw" Description="Folder where the model is downloaded and kept" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/olala/models</Config>
+  <Config Name="MODEL_FILE" Target="MODEL_FILE" Default="Olala-v1.0-mini-7A1B-q8_0-safe2.gguf" Mode="" Description="Model file to use: q8_0-safe2 (6.9 GB, recommended on x86 CPUs) or q5_k_m (6.0 GB, lighter)" Type="Variable" Display="always" Required="true" Mask="false">Olala-v1.0-mini-7A1B-q8_0-safe2.gguf</Config>
+  <Config Name="MODEL_REPO" Target="MODEL_REPO" Default="OVHaiLLM/Olala-v1.0-mini-7A1B-GGUF" Mode="" Description="Hugging Face repository the model is downloaded from" Type="Variable" Display="advanced" Required="false" Mask="false">OVHaiLLM/Olala-v1.0-mini-7A1B-GGUF</Config>
+  <Config Name="MODEL_ALIAS" Target="MODEL_ALIAS" Default="olala-mini" Mode="" Description="Model name exposed by the API (use it as the model ID in Hermes)" Type="Variable" Display="always" Required="false" Mask="false">olala-mini</Config>
+  <Config Name="THREADS" Target="THREADS" Default="5" Mode="" Description="Number of CPU cores used by the model. Keep at least one core free for the server. For a hard limit as a safety net, also add --cpus=5 in Extra Parameters (Advanced View)" Type="Variable" Display="always" Required="true" Mask="false">5</Config>
+  <Config Name="CTX_SIZE" Target="CTX_SIZE" Default="32768" Mode="" Description="Context size in tokens (32768 maximum for this model), shared between parallel requests" Type="Variable" Display="always" Required="true" Mask="false">32768</Config>
+  <Config Name="PARALLEL" Target="PARALLEL" Default="2" Mode="" Description="Number of requests processed at the same time" Type="Variable" Display="always" Required="true" Mask="false">2</Config>
+  <Config Name="REASONING_EFFORT" Target="REASONING_EFFORT" Default="low" Mode="" Description="Default reasoning effort: disabled, low, medium or high (higher is slower on CPU)" Type="Variable" Display="always" Required="true" Mask="false">low</Config>
+  <Config Name="API_KEY" Target="API_KEY" Default="" Mode="" Description="Optional. If set, clients must send this key" Type="Variable" Display="always" Required="false" Mask="true"/>
+  <Config Name="EXTRA_ARGS" Target="EXTRA_ARGS" Default="" Mode="" Description="Optional extra llama-server options (advanced)" Type="Variable" Display="always" Required="false" Mask="false"/>
 </Container>
