@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <Container version="2">
   <Name>Olala-Server</Name>
-  <Repository>TON_PSEUDO_DOCKERHUB/olala-server:latest</Repository>
-  <Registry>https://hub.docker.com/r/TON_PSEUDO_DOCKERHUB/olala-server</Registry>
+  <Repository>bayota/olala-server:latest</Repository>
+  <Registry>https://hub.docker.com/r/bayota/olala-server</Registry>
   <Network>bridge</Network>
   <Privileged>false</Privileged>
   <Support>https://github.com/riourik/olala-server</Support>
